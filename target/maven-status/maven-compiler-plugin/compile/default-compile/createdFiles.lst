@@ -1,2 +1,7 @@
-com\coutrim\bibilhoteca_rest_service\HelloApplication.class
-com\coutrim\bibilhoteca_rest_service\HelloResource.class
+com\coutrim\bibilhoteca_rest_service\model\Livros.class
+com\coutrim\bibilhoteca_rest_service\rest\LivrosRest.class
+com\coutrim\bibilhoteca_rest_service\service\LivrosService.class
+com\coutrim\bibilhoteca_rest_service\exception\BibliotecaException.class
+com\coutrim\bibilhoteca_rest_service\dto\LivrosDTO.class
+com\coutrim\bibilhoteca_rest_service\BibilhotecaApplication.class
+com\coutrim\bibilhoteca_rest_service\dao\LivrosDAO.class
