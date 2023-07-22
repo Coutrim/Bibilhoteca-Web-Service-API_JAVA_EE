@@ -1,6 +1,54 @@
 # Back-end do projeto bibilhoteca-rest
 ## Esse é uma API desenvolvida com a arquitetura REST. No back-end: Java EE 8 com EJB3, RESTEasy (JAX-RS), Hibernate/JPA e o gerenciador de dependências Maven. O banco de dados é o MySQL 8.
 
+
+
+## Regras de negócio e validações
+As regras de negócio do projeto de Gerenciamento de Biblioteca são as seguintes:
+
+### 1 - Rollback Manual (Transação JTA):
+
+Caso ocorra um erro durante o empréstimo do livro (Ex: na atualização da data de empréstimo(passo 2) ), desfazer o empréstimo realizado anteriormente, restaurando a disponibilidade do livro (disponivel = true) e removendo o registro do empréstimo da tabela emprestimos.
+
+### 2 - Cadastro de Livros:
+   Ao cadastrar um novo livro (endpoint POST /api/livros), os campos obrigatórios titulo, autor e disponivel devem ser fornecidos.
+   O campo disponivel indica se o livro está disponível para empréstimo (true) ou se já está emprestado (false) no momento do cadastro.
+   
+### 3 - Realização de Empréstimo:
+
+Ao realizar um empréstimo (endpoint POST /api/emprestimos), deve-se fornecer o usuario_id e o livro_id.
+Verificar se o livro está disponível para empréstimo (disponivel = true). Caso contrário, retornar um erro adequado informando que o livro não está disponível para empréstimo no momento.
+
+### 4 - Realização de Devolução:
+
+Ao realizar a devolução de um livro (endpoint PUT /api/emprestimos/{emprestimoId}), atualizar a data de devolução (data_devolucao) para a data atual.
+Verificar se o empréstimo com o ID fornecido (emprestimoId) existe e se está associado ao usuário correto. Caso contrário, retornar um erro adequado informando que o empréstimo não foi encontrado ou não pertence ao usuário em questão.
+
+
+### 5 - Detalhes de um Livro:
+
+Ao obter informações de um livro específico (endpoint GET /api/livros/{livroId}), retornar detalhes específicos desse livro, identificado pelo livroId.
+
+
+### 6 - Tratamento de Erros:
+
+Implementar um tratamento adequado para os erros, garantindo que as respostas de erro incluam informações úteis para o cliente, como mensagens descritivas sobre o problema ocorrido.
+Utilizar códigos de status HTTP apropriados para cada tipo de erro (por exemplo, código 404 Not Found quando um recurso não for encontrado).
+
+### 7 - Cadastro de Usuários:
+
+Ao cadastrar um novo usuário (endpoint POST /api/usuarios), o campo nome deve ser fornecido como obrigatório.
+Verificar se já existe um usuário com o mesmo nome cadastrado na base de dados. Caso já exista, retornar um erro informando que o nome de usuário já está em uso.
+
+
+### 8 - Empréstimos Expirados:
+
+Ao listar os empréstimos em andamento (por exemplo, endpoint GET /api/emprestimos), verificar se algum empréstimo possui a data de devolução (data_devolucao) expirada (data atual maior que a data de devolução).
+Caso existam empréstimos expirados, retornar essas informações na resposta da API para que a biblioteca possa tomar as providências adequadas.
+
+
+
+
 ## Relacionamento das tabelas MySQL:
 
 1 - One-to-Many (User-to-Loans): Cada usuário pode fazer vários empréstimos.
@@ -8,6 +56,13 @@
 2 - Many-to-One (Loans-to-User e Loans-to-Books): Um empréstimo é feito por um único usuário e está associado a um único livro.
 
 3 - Many-to-Many (Users-to-Books): Cada usuário pode emprestar vários livros e um livro pode ser emprestado por vários usuários.
+
+
+
+
+
+
+
 
 
 ## URLs:
@@ -20,25 +75,6 @@
 |`http://localhost:8080/apostas-backend/api/apostas/id`                              | PUT | Atualiza o registro da aposta com o ID numérico do parâmetro da URL|
 
 
-## Validações das requisições POST e PUT
-Para executar os métodos HTTP da aplicação com alguma ferramenta de testes de API, como o [Postman](https://www.postman.com/) por exemplo, é necessário habilitar todas opções sugeridas no cabeçalho (header) da requisição e com o atributo chave-valor "Content-Type: application/json".
-No método POST, o corpo da requisição deve ser enviado dessa forma:
-
-    {   
-     "acertos":"1",
-     "erros": "1",
-     "ganhos":"2098",
-     "data":"2022-04-01 14:30:00"
-    
-}
-
-O campo **acertos** não pode ser nulo e deve ter entre 2 e 200 caracteres.<br>
-O campo **erros** pode ser nulo.<br>
-O campo **ganhos** pode ser nulo. Caso for preenchido, deve ser válido, contendo um "@" na string.<br>
-A **data** pode ser nula. Caso for preenchida, deve ser válida, no formato "YYYY-MM-DD".<br>
-
-
-O corpo da requisição no método PUT é similar ao POST. A diferença é que o ID do registro a ser editado deve ser passado como parâmetro na URL.
 
 ## Para executar o projeto:
 O projeto foi desenvolvido para funcionar no servidor de aplicações WildFly 19, então algumas configurações extras são necessárias.
