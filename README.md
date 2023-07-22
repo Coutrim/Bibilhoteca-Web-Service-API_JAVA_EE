@@ -6,42 +6,46 @@
 ## Regras de negócio e validações
 As regras de negócio do projeto de Gerenciamento de Biblioteca são as seguintes:
 
-### 1 - Cadastro de Livros:
+### 1 - Rollback Manual:
+
+Caso ocorra um erro durante a atualização da data de devolução (passo 2), desfazer o empréstimo realizado anteriormente, restaurando a disponibilidade do livro (disponivel = true) e removendo o registro do empréstimo da tabela emprestimos.
+
+### 2 - Cadastro de Livros:
    Ao cadastrar um novo livro (endpoint POST /api/livros), os campos obrigatórios titulo, autor e disponivel devem ser fornecidos.
    O campo disponivel indica se o livro está disponível para empréstimo (true) ou se já está emprestado (false) no momento do cadastro.
    
-### 2 - Realização de Empréstimo:
+### 3 - Realização de Empréstimo:
 
 Ao realizar um empréstimo (endpoint POST /api/emprestimos), deve-se fornecer o usuario_id e o livro_id.
 Verificar se o livro está disponível para empréstimo (disponivel = true). Caso contrário, retornar um erro adequado informando que o livro não está disponível para empréstimo no momento.
 
-### 3 - Realização de Devolução:
+### 4 - Realização de Devolução:
 
 Ao realizar a devolução de um livro (endpoint PUT /api/emprestimos/{emprestimoId}), atualizar a data de devolução (data_devolucao) para a data atual.
 Verificar se o empréstimo com o ID fornecido (emprestimoId) existe e se está associado ao usuário correto. Caso contrário, retornar um erro adequado informando que o empréstimo não foi encontrado ou não pertence ao usuário em questão.
 
 
-### 4 - Detalhes de um Livro:
+### 5 - Detalhes de um Livro:
 
 Ao obter informações de um livro específico (endpoint GET /api/livros/{livroId}), retornar detalhes específicos desse livro, identificado pelo livroId.
 
-### 5 - Validar Requisições:
+### 6 - Validar Requisições:
 
 Validar as requisições recebidas pela API para garantir que os campos obrigatórios estão sendo fornecidos corretamente.
 Retornar respostas HTTP apropriadas (por exemplo, código 400 Bad Request) com mensagens de erro descritivas em caso de falhas nas validações.
 
-### 6 - Tratamento de Erros:
+### 7 - Tratamento de Erros:
 
 Implementar um tratamento adequado para os erros, garantindo que as respostas de erro incluam informações úteis para o cliente, como mensagens descritivas sobre o problema ocorrido.
 Utilizar códigos de status HTTP apropriados para cada tipo de erro (por exemplo, código 404 Not Found quando um recurso não for encontrado).
 
-### 7 - Cadastro de Usuários:
+### 8 - Cadastro de Usuários:
 
 Ao cadastrar um novo usuário (endpoint POST /api/usuarios), o campo nome deve ser fornecido como obrigatório.
 Verificar se já existe um usuário com o mesmo nome cadastrado na base de dados. Caso já exista, retornar um erro informando que o nome de usuário já está em uso.
 
 
-### 8 - Empréstimos Expirados:
+### 9 - Empréstimos Expirados:
 
 Ao listar os empréstimos em andamento (por exemplo, endpoint GET /api/emprestimos), verificar se algum empréstimo possui a data de devolução (data_devolucao) expirada (data atual maior que a data de devolução).
 Caso existam empréstimos expirados, retornar essas informações na resposta da API para que a biblioteca possa tomar as providências adequadas.
