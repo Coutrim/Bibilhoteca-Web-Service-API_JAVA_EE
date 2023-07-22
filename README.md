@@ -6,11 +6,11 @@
 ## Regras de negócio e validações
 As regras de negócio do projeto de Gerenciamento de Biblioteca são as seguintes:
 
-## 1 - Cadastro de Livros:
+### 1 - Cadastro de Livros:
    Ao cadastrar um novo livro (endpoint POST /api/livros), os campos obrigatórios titulo, autor e disponivel devem ser fornecidos.
    O campo disponivel indica se o livro está disponível para empréstimo (true) ou se já está emprestado (false) no momento do cadastro.
    
-## 2 - Realização de Empréstimo:
+### 2 - Realização de Empréstimo:
 
 Ao realizar um empréstimo (endpoint POST /api/emprestimos), deve-se fornecer o usuario_id e o livro_id.
 Verificar se o livro está disponível para empréstimo (disponivel = true). Caso contrário, retornar um erro adequado informando que o livro não está disponível para empréstimo no momento.
