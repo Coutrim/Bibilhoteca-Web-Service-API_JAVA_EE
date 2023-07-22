@@ -8,7 +8,7 @@ As regras de negócio do projeto de Gerenciamento de Biblioteca são as seguinte
 
 ### 1 - Rollback Manual (Transação JTA):
 
-Caso ocorra um erro durante a atualização da data de devolução (passo 2), desfazer o empréstimo realizado anteriormente, restaurando a disponibilidade do livro (disponivel = true) e removendo o registro do empréstimo da tabela emprestimos.
+Caso ocorra um erro durante o empréstimo do livro (Ex: na atualização da data de devolução (passo 2) ), desfazer o empréstimo realizado anteriormente, restaurando a disponibilidade do livro (disponivel = true) e removendo o registro do empréstimo da tabela emprestimos.
 
 ### 2 - Cadastro de Livros:
    Ao cadastrar um novo livro (endpoint POST /api/livros), os campos obrigatórios titulo, autor e disponivel devem ser fornecidos.
