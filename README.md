@@ -1,38 +1,21 @@
 # Back-end do projeto bibilhoteca-rest
 ## Esse é uma API desenvolvida com a arquitetura REST. No back-end: Java EE 8 com EJB3, RESTEasy (JAX-RS), Hibernate/JPA e o gerenciador de dependências Maven. O banco de dados é o MySQL 8.
 
-## Relacionamento das tabelas MySQL:
-
-1 - One-to-Many (User-to-Loans): Cada usuário pode fazer vários empréstimos.
-
-2 - Many-to-One (Loans-to-User e Loans-to-Books): Um empréstimo é feito por um único usuário e está associado a um único livro.
-
-3 - Many-to-Many (Users-to-Books): Cada usuário pode emprestar vários livros e um livro pode ser emprestado por vários usuários.
-
-
-## URLs:
-|  URL |  Método | Descrição |
-|----------|--------------|--------------|
-|`http://localhost:8080/apostas-backend/api/apostas`                                 | GET | Retorna todas as apostas salvas no banco de dados |
-|`http://localhost:8080/apostas-backend/api/apostas`                                 | POST | Salva uma aposta no banco de dados |
-|`http://localhost:8080/apostas-backend/api/apostas/id`                              | GET | Retorna a aposta com o ID do parâmetro da URL |
-|`http://localhost:8080/apostas-backend/api/apostas/id`                              | DELETE | Deleta o registro da aposta com o ID do parâmetro da URL |
-|`http://localhost:8080/apostas-backend/api/apostas/id`                              | PUT | Atualiza o registro da aposta com o ID numérico do parâmetro da URL|
 
 
 ## Regras de negócio e validações
 As regras de negócio do projeto de Gerenciamento de Biblioteca são as seguintes:
 
-1 - Cadastro de Livros:
+## 1 - Cadastro de Livros:
    Ao cadastrar um novo livro (endpoint POST /api/livros), os campos obrigatórios titulo, autor e disponivel devem ser fornecidos.
    O campo disponivel indica se o livro está disponível para empréstimo (true) ou se já está emprestado (false) no momento do cadastro.
    
-2 - Realização de Empréstimo:
+## 2 - Realização de Empréstimo:
 
 Ao realizar um empréstimo (endpoint POST /api/emprestimos), deve-se fornecer o usuario_id e o livro_id.
 Verificar se o livro está disponível para empréstimo (disponivel = true). Caso contrário, retornar um erro adequado informando que o livro não está disponível para empréstimo no momento.
 
-3 - Realização de Devolução:
+## 3 - Realização de Devolução:
 
 Ao realizar a devolução de um livro (endpoint PUT /api/emprestimos/{emprestimoId}), atualizar a data de devolução (data_devolucao) para a data atual.
 Verificar se o empréstimo com o ID fornecido (emprestimoId) existe e se está associado ao usuário correto. Caso contrário, retornar um erro adequado informando que o empréstimo não foi encontrado ou não pertence ao usuário em questão.
@@ -65,6 +48,26 @@ Verificar se já existe um usuário com o mesmo nome cadastrado na base de dados
 Ao listar os empréstimos em andamento (por exemplo, endpoint GET /api/emprestimos), verificar se algum empréstimo possui a data de devolução (data_devolucao) expirada (data atual maior que a data de devolução).
 Caso existam empréstimos expirados, retornar essas informações na resposta da API para que a biblioteca possa tomar as providências adequadas.
 
+
+
+
+## Relacionamento das tabelas MySQL:
+
+1 - One-to-Many (User-to-Loans): Cada usuário pode fazer vários empréstimos.
+
+2 - Many-to-One (Loans-to-User e Loans-to-Books): Um empréstimo é feito por um único usuário e está associado a um único livro.
+
+3 - Many-to-Many (Users-to-Books): Cada usuário pode emprestar vários livros e um livro pode ser emprestado por vários usuários.
+
+
+## URLs:
+|  URL |  Método | Descrição |
+|----------|--------------|--------------|
+|`http://localhost:8080/apostas-backend/api/apostas`                                 | GET | Retorna todas as apostas salvas no banco de dados |
+|`http://localhost:8080/apostas-backend/api/apostas`                                 | POST | Salva uma aposta no banco de dados |
+|`http://localhost:8080/apostas-backend/api/apostas/id`                              | GET | Retorna a aposta com o ID do parâmetro da URL |
+|`http://localhost:8080/apostas-backend/api/apostas/id`                              | DELETE | Deleta o registro da aposta com o ID do parâmetro da URL |
+|`http://localhost:8080/apostas-backend/api/apostas/id`                              | PUT | Atualiza o registro da aposta com o ID numérico do parâmetro da URL|
 
 
 
