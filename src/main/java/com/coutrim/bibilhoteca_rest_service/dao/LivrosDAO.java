@@ -1,6 +1,7 @@
 package com.coutrim.bibilhoteca_rest_service.dao;
 
 import com.coutrim.bibilhoteca_rest_service.model.Livros;
+import net.bytebuddy.implementation.bytecode.Throw;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -29,13 +30,17 @@ public class LivrosDAO {
         return livros;
     }
 
-    public Livros atualizarLivro(Livros livros){
-        entityManager.merge(livros);
-        return livros;
+
+    public Livros atualizarLivro(Livros livro) {
+        return entityManager.merge(livro);
     }
 
-    public void removerLivro(Livros livro){
-        entityManager.remove(livro);
-
+    public void removerLivro(Long id) throws Exception {
+        Livros livro = entityManager.find(Livros.class, id);
+        if (livro != null) {
+            entityManager.remove(livro);
+        } else {
+           throw new Exception("Livro não encontrado");
+        }
     }
 }
