@@ -29,23 +29,19 @@ Verificar se o empréstimo com o ID fornecido (emprestimoId) existe e se está a
 
 Ao obter informações de um livro específico (endpoint GET /api/livros/{livroId}), retornar detalhes específicos desse livro, identificado pelo livroId.
 
-### 6 - Validar Requisições:
 
-Validar as requisições recebidas pela API para garantir que os campos obrigatórios estão sendo fornecidos corretamente.
-Retornar respostas HTTP apropriadas (por exemplo, código 400 Bad Request) com mensagens de erro descritivas em caso de falhas nas validações.
-
-### 7 - Tratamento de Erros:
+### 6 - Tratamento de Erros:
 
 Implementar um tratamento adequado para os erros, garantindo que as respostas de erro incluam informações úteis para o cliente, como mensagens descritivas sobre o problema ocorrido.
 Utilizar códigos de status HTTP apropriados para cada tipo de erro (por exemplo, código 404 Not Found quando um recurso não for encontrado).
 
-### 8 - Cadastro de Usuários:
+### 7 - Cadastro de Usuários:
 
 Ao cadastrar um novo usuário (endpoint POST /api/usuarios), o campo nome deve ser fornecido como obrigatório.
 Verificar se já existe um usuário com o mesmo nome cadastrado na base de dados. Caso já exista, retornar um erro informando que o nome de usuário já está em uso.
 
 
-### 9 - Empréstimos Expirados:
+### 8 - Empréstimos Expirados:
 
 Ao listar os empréstimos em andamento (por exemplo, endpoint GET /api/emprestimos), verificar se algum empréstimo possui a data de devolução (data_devolucao) expirada (data atual maior que a data de devolução).
 Caso existam empréstimos expirados, retornar essas informações na resposta da API para que a biblioteca possa tomar as providências adequadas.
