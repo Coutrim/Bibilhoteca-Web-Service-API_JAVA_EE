@@ -62,6 +62,13 @@ Caso existam empréstimos expirados, retornar essas informações na resposta da
 3 - Many-to-Many (Users-to-Books): Cada usuário pode emprestar vários livros e um livro pode ser emprestado por vários usuários.
 
 
+
+
+
+
+
+
+
 ## URLs:
 |  URL |  Método | Descrição |
 |----------|--------------|--------------|
