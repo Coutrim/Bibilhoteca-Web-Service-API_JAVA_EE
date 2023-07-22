@@ -6,7 +6,7 @@
 ## Regras de negócio e validações
 As regras de negócio do projeto de Gerenciamento de Biblioteca são as seguintes:
 
-### 1 - Rollback Manual:
+### 1 - Rollback Manual (Transação JTA):
 
 Caso ocorra um erro durante a atualização da data de devolução (passo 2), desfazer o empréstimo realizado anteriormente, restaurando a disponibilidade do livro (disponivel = true) e removendo o registro do empréstimo da tabela emprestimos.
 
