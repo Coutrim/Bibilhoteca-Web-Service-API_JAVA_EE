@@ -27,7 +27,7 @@ public class LivrosRest {
     @POST
     public Response salvarLivro(LivrosDTO livroDTO){
         try{
-            return Response.created(URI.create(String.valueOf(livrosService.salvarLivro(livroDTO).getId()))).build();
+            return Response.created(URI.create(String.valueOf(livrosService.salvarLivro(livroDTO)))).build();
         }catch (Exception e){
             if(e.getCause() instanceof BibliotecaException){
                 return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
