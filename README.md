@@ -10,7 +10,7 @@ As regras de negócio do projeto de Gerenciamento de Biblioteca são as seguinte
 
 Caso ocorra um erro durante o empréstimo do livro (Ex: na atualização da data de empréstimo(passo 2) ), desfazer o empréstimo realizado anteriormente, restaurando a disponibilidade do livro (disponivel = true) e removendo o registro do empréstimo da tabela emprestimos.
 
-### 2 - Cadastro de Livros:
+### 2 - Cadastro de Livros (OK):
    Ao cadastrar um novo livro (endpoint POST /api/livros), os campos obrigatórios titulo, autor e disponivel devem ser fornecidos.
    O campo disponivel indica se o livro está disponível para empréstimo (true) ou se já está emprestado (false) no momento do cadastro.
    
