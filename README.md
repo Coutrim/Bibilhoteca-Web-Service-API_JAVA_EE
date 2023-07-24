@@ -25,9 +25,9 @@ Ao realizar a devolução de um livro (endpoint PUT /api/emprestimos/{emprestimo
 Verificar se o empréstimo com o ID fornecido (emprestimoId) existe e se está associado ao usuário correto. Caso contrário, retornar um erro adequado informando que o empréstimo não foi encontrado ou não pertence ao usuário em questão.
 
 
-### 5 - Detalhes de um Livro:
+### 5 - Monitoramento de usuários - livros:
 
-Ao obter informações de um livro específico (endpoint GET /api/livros/{livroId}), retornar detalhes específicos desse livro, identificado pelo livroId.
+A tabela "usuarios_livros" deve ser preenchida automaticamente quando um empréstimo for realizado.
 
 
 ### 6 - Tratamento de Erros:
